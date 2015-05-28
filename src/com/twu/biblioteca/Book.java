@@ -1,10 +1,5 @@
 package com.twu.biblioteca;
 
-import com.twu.BookCheckedOutException;
-
-/**
- * Created by dmn on 28/05/15.
- */
 public class Book {
 
     private boolean checkedOut;
@@ -12,24 +7,32 @@ public class Book {
     private String author;
     private String yearPublished;
 
-    public Book(String name)
-    {
+    public Book(String name, String author, String yearPublished) {
         this.name = name;
+        this.author = author;
+        this.yearPublished = yearPublished;
     }
 
     public String getName() {
         return name;
     }
 
+    public String getAuthor() {
+        return author;
+    }
+
+    public String getYearPublished() {
+        return yearPublished;
+    }
+
     public boolean isCheckedOut() {
         return checkedOut;
     }
 
-    public void checkOut() throws BookCheckedOutException {
-        if (checkedOut)
-            throw new BookCheckedOutException();
+    public void checkOut()  {
         this.checkedOut = true;
     }
+
     public void checkIn() {
         this.checkedOut = false;
     }
