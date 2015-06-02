@@ -3,18 +3,18 @@ package com.twu.biblioteca;
 public class Book {
 
     private boolean checkedOut;
-    private String name;
+    private String title;
     private String author;
     private String yearPublished;
 
-    public Book(String name, String author, String yearPublished) {
-        this.name = name;
+    public Book(String title, String author, String yearPublished) {
+        this.title = title;
         this.author = author;
         this.yearPublished = yearPublished;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
     public String getAuthor() {

@@ -25,7 +25,8 @@ public class BibliotecaApp {
 
     public void run() {
         printWelcomeMessage();
-        listBooks();
+        System.out.println(listBooks());
+        showMenu();
         runPrompt();
     }
 
@@ -37,7 +38,7 @@ public class BibliotecaApp {
         String output = "BOOK LIST (name, author, year published):\n";
         for (Book book : lib.getBookList()) {
             if (!book.isCheckedOut())
-                output += book.getName() + ", " + book.getAuthor() + ", " + book.getYearPublished() + '\n';
+                output += book.getTitle() + ", " + book.getAuthor() + ", " + book.getYearPublished() + '\n';
         }
         return output;
     }
@@ -49,7 +50,6 @@ public class BibliotecaApp {
     }
 
     public void runPrompt() {
-        showMenu();
         String output;
         while (true) {
 

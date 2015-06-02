@@ -1,9 +1,28 @@
 package com.twu.biblioteca;
 
 import junit.framework.TestCase;
+import org.junit.Test;
+import org.junit.Before;
+import org.junit.After;
+import java.io.ByteArrayOutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.PrintStream;
 
 public class BibliotecaAppTest extends TestCase {
 
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+
+    @Before
+    public void setUp() {
+        System.setOut(new PrintStream(outContent));
+    }
+
+    @After
+    public void tearDown() {
+        System.setOut(null);
+    }
+
+    @Test
     public void testCommandReturnBook() throws Exception {
         BibliotecaApp app = new BibliotecaApp();
 
@@ -18,6 +37,7 @@ public class BibliotecaAppTest extends TestCase {
 
     }
 
+    @Test
     public void testCommandCheckoutBook() throws Exception {
         BibliotecaApp app = new BibliotecaApp();
 
@@ -28,6 +48,7 @@ public class BibliotecaAppTest extends TestCase {
         assertEquals("Thank you! Enjoy the book.", app.commandCheckoutBook("Test Book"));
     }
 
+    @Test
     public void testListBooks() throws Exception {
 
         BibliotecaApp app = new BibliotecaApp();
@@ -54,5 +75,44 @@ public class BibliotecaAppTest extends TestCase {
                         "1984, George Orwell, 1949\n",
                 app.listBooks());
 
+    }
+
+    @Test
+    public void testPrintWelcomeMessage() throws Exception {
+        BibliotecaApp app  = new BibliotecaApp();
+        app.printWelcomeMessage();
+        assertEquals("Welcome to Biblioteca!\n\n", outContent.toString());
+    }
+
+    @Test
+    public void testShowMenu() throws Exception {
+        BibliotecaApp app  = new BibliotecaApp();
+        app.showMenu();
+        assertEquals("MENU LIST (select an option):\n" +
+                "listbooks - list the currently available books\n" +
+                "checkout - check out a book\n" +
+                "return - return a book\n" +
+                "exit - exit Biblioteca\n", outContent.toString());
+    }
+
+    @Test
+    public void testRunPrompt() throws Exception {
+        BibliotecaApp app  = new BibliotecaApp();
+        ByteArrayInputStream in = new ByteArrayInputStream("exit\n".getBytes());
+        System.setIn(in);
+        app.run();
+        assertEquals("Welcome to Biblioteca!\n" +
+                "\n" +
+                "BOOK LIST (name, author, year published):\n" +
+                "Test Book, Doug Neale, 2015\n" +
+                "The Hunger Games, Suzanne Collins, 2008\n" +
+                "1984, George Orwell, 1949\n" +
+                "\n" +
+                "MENU LIST (select an option):\n" +
+                "listbooks - list the currently available books\n" +
+                "checkout - check out a book\n" +
+                "return - return a book\n" +
+                "exit - exit Biblioteca\n" +
+                "Enter an option: Exiting\n", outContent.toString());
     }
 }

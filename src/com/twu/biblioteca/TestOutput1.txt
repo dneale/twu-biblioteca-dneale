@@ -1,0 +1,14 @@
+Welcome to Biblioteca!
+
+BOOK LIST (name, author, year published):
+Test Book, Doug Neale, 2015
+The Hunger Games, Suzanne Collins, 2008
+1984, George Orwell, 1949
+
+MENU LIST (select an option):
+listbooks - list the currently available books
+checkout - check out a book
+return - return a book
+exit - exit Biblioteca
+Enter an option: exit
+Exiting

@@ -22,7 +22,7 @@ public class Library {
 
     public Book findBook(String name) throws BookNotFoundException {
         for (Book b : getBookList()) {
-            if (b.getName().equals(name)) {
+            if (b.getTitle().equals(name)) {
                 return b;
             }
         }
