@@ -18,7 +18,7 @@ public class BibliotecaApp {
 
     public BibliotecaApp() {
         lib = new Library();
-        this.currentUser = new User(0, "", "", "");
+        this.currentUser = new User(0, "", "", "", "");
         menuItems = new ArrayList<String>();
         menuItems.add("listbooks - list the currently available books");
         menuItems.add("listmovies - list the currently available movies");
@@ -29,6 +29,11 @@ public class BibliotecaApp {
     }
 
     public void run() {
+        if (!runLogin())
+        {
+            System.out.println("Login failed. Exiting");
+            return;
+        }
         printWelcomeMessage();
         System.out.println(listBooks());
         showMenu();
@@ -48,6 +53,15 @@ public class BibliotecaApp {
         return output;
     }
 
+    public String listMovies() {
+        String output = "MOVIE LIST (name, director, year released, rating):\n";
+        for (Movie movie : lib.getMovieList()) {
+            if (!movie.isCheckedOut())
+                output += movie.getTitle() + ", " + movie.getDirector() + ", " + movie.getYearReleased() + ", " + movie.getRating() + '\n';
+        }
+        return output;
+    }
+
     public void showMenu() {
         System.out.println("MENU LIST (select an option):");
         for (String item : menuItems)
@@ -57,13 +71,15 @@ public class BibliotecaApp {
     public void runPrompt() {
         String output;
         while (true) {
-
             Scanner scanner = new Scanner(System.in);
             System.out.print("Enter an option: ");
             String option = scanner.nextLine();
 
             if (option.equals("listbooks")) {
                 output = listBooks();
+            }
+            else if (option.equals("listmovies")) {
+                output = listMovies();
             }
             else if (option.equals("checkout")) {
                 System.out.print("Enter book name: ");
@@ -74,6 +90,10 @@ public class BibliotecaApp {
                 System.out.print("Enter book name: ");
                 String bookName = scanner.nextLine();
                 output = commandReturnBook(bookName);
+            }
+            else if (option.equals("userinfo"))
+            {
+                output = currentUser.showInfo();
             }
             else if (option.equals("exit")) {
                 System.out.println("Exiting");
@@ -116,7 +136,7 @@ public class BibliotecaApp {
         }
         if (!b.isCheckedOut())
         {
-            b.checkOut();
+            b.checkOut(currentUser);
             return "Thank you! Enjoy the book.";
         }
         else
@@ -143,6 +163,22 @@ public class BibliotecaApp {
             }
         }
         return false;
+    }
+
+    public boolean runLogin()
+    {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("User ID: ");
+        String userId = scanner.nextLine();
+        System.out.print("Password: ");
+        String password = scanner.nextLine();
+        try{
+            return login(Integer.parseInt(userId), password);
+        }
+        catch (NumberFormatException e) {
+            return false;
+        }
+
     }
 
 

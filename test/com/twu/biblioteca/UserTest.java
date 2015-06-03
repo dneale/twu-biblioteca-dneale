@@ -11,7 +11,7 @@ public class UserTest extends TestCase {
 
     public void setUp() throws Exception {
         super.setUp();
-        u = new User(1, "password", "doug", "dougneale@gmail.com");
+        u = new User(1, "password", "doug", "dougneale@gmail.com", "1234 1234");
     }
 
     public void testGetId() throws Exception {
@@ -23,11 +23,21 @@ public class UserTest extends TestCase {
         assertEquals("password", u.getPassword());
     }
 
-    public void testGetUsername() throws Exception {
-        assertEquals("doug", u.getUsername());
+    public void testGetName() throws Exception {
+        assertEquals("doug", u.getName());
     }
 
     public void testGetEmail() throws Exception {
         assertEquals("dougneale@gmail.com", u.getEmail());
+    }
+
+    public void testShowInfo() throws Exception {
+        assertEquals( "ID: 1\n" +
+                "Name: doug\n" +
+                "Email: dougneale@gmail.com\n", u.showInfo());
+    }
+
+    public void testGetPhoneNumber() throws Exception {
+        assertEquals("1234 1234", u.getPhoneNumber());
     }
 }

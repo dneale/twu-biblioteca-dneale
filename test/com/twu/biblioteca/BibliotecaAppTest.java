@@ -49,7 +49,7 @@ public class BibliotecaAppTest extends TestCase {
     }
 
     @Test
-    public void testListBooks() throws Exception {
+      public void testListBooks() throws Exception {
 
         BibliotecaApp app = new BibliotecaApp();
 
@@ -78,6 +78,19 @@ public class BibliotecaAppTest extends TestCase {
     }
 
     @Test
+    public void testListMovies() throws Exception {
+
+        BibliotecaApp app = new BibliotecaApp();
+
+        // basic test
+        assertEquals("MOVIE LIST (name, director, year released, rating):\n" +
+                        "Test Movie, Doug Neale, 2015, 9\n" +
+                        "Inception, Christopher Nolan, 2009, 9\n" +
+                        "The Matrix, The Wachoski Brothers, 1999, 0\n",
+                app.listMovies());
+    }
+
+    @Test
     public void testPrintWelcomeMessage() throws Exception {
         BibliotecaApp app  = new BibliotecaApp();
         app.printWelcomeMessage();
@@ -97,30 +110,34 @@ public class BibliotecaAppTest extends TestCase {
                 "exit - exit Biblioteca\n", outContent.toString());
     }
 
-    @Test
-    public void testRunPrompt() throws Exception {
-        BibliotecaApp app  = new BibliotecaApp();
-        ByteArrayInputStream in = new ByteArrayInputStream("exit\n".getBytes());
-        System.setIn(in);
-        app.run();
-        assertEquals("Welcome to Biblioteca!\n" +
-                "\n" +
-                "BOOK LIST (name, author, year published):\n" +
-                "Test Book, Doug Neale, 2015\n" +
-                "The Hunger Games, Suzanne Collins, 2008\n" +
-                "1984, George Orwell, 1949\n" +
-                "\n" +
-                "MENU LIST (select an option):\n" +
-                "listbooks - list the currently available books\n" +
-                "listmovies - list the currently available movies\n" +
-                "checkout - check out a book\n" +
-                "return - return a book\n" +
-                "userinfo - view your information\n" +
-                "exit - exit Biblioteca\n" +
-                "Enter an option: Exiting\n", outContent.toString());
-    }
+//    @Test
+//    public void testRun() throws Exception {
+//
+//        ByteArrayInputStream in = new ByteArrayInputStream("1\npassword\nexit\n".getBytes());
+//        BibliotecaApp app  = new BibliotecaApp();
+//        System.setIn(in);
+//        app.run();
+//        assertEquals(
+//                "User ID: " +
+//                "Password: \n" +
+//                "Welcome to Biblioteca!\n" +
+//                "\n" +
+//                "BOOK LIST (name, author, year published):\n" +
+//                "Test Book, Doug Neale, 2015\n" +
+//                "The Hunger Games, Suzanne Collins, 2008\n" +
+//                "1984, George Orwell, 1949\n" +
+//                "\n" +
+//                "MENU LIST (select an option):\n" +
+//                "listbooks - list the currently available books\n" +
+//                "listmovies - list the currently available movies\n" +
+//                "checkout - check out a book\n" +
+//                "return - return a book\n" +
+//                "userinfo - view your information\n" +
+//                "exit - exit Biblioteca\n" +
+//                "Enter an option: Exiting\n", outContent.toString());
+//    }
 
-    public void testLogIn() throws Exception {
+    public void testLogin() throws Exception {
         BibliotecaApp app  = new BibliotecaApp();
         assertTrue(app.login(1, "password"));
         assertEquals(1, app.getCurrentUser().getId());
@@ -128,5 +145,38 @@ public class BibliotecaAppTest extends TestCase {
         assertFalse(app.login(1, "wrong password"));
         assertFalse(app.login(99, "password"));
 
+    }
+
+    public void testRunLoginSuccess() throws Exception {
+
+        ByteArrayInputStream in = new ByteArrayInputStream("1\npassword\n".getBytes());
+        BibliotecaApp app  = new BibliotecaApp();
+        System.setIn(in);
+        app.runLogin();
+        assertEquals("User ID: " +
+                        "Password: ",
+                outContent.toString());
+    }
+    public void testRunFailLogin() throws Exception {
+
+        ByteArrayInputStream in = new ByteArrayInputStream("1\nwrong\n".getBytes());
+        BibliotecaApp app  = new BibliotecaApp();
+        System.setIn(in);
+        app.run();
+        assertEquals("User ID: " +
+                        "Password: " +
+                "Login failed. Exiting\n",
+                outContent.toString());
+    }
+    public void testRunFailLoginBadUserID() throws Exception {
+
+        ByteArrayInputStream in = new ByteArrayInputStream("1\nwrong\n".getBytes());
+        BibliotecaApp app  = new BibliotecaApp();
+        System.setIn(in);
+        app.run();
+        assertEquals("User ID: " +
+                        "Password: " +
+                        "Login failed. Exiting\n",
+                outContent.toString());
     }
 }

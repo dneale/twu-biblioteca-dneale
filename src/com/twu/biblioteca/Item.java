@@ -7,10 +7,17 @@ public class Item {
     protected boolean checkedOut;
     protected String title;
 
+    public User getBorrowingUser() {
+        return borrowingUser;
+    }
+
+    protected User borrowingUser;
+
     public Item(String title)
     {
         this.title = title;
         this.checkedOut = false;
+        this.borrowingUser = null;
     }
 
     public String getTitle() {
@@ -21,11 +28,13 @@ public class Item {
         return checkedOut;
     }
 
-    public void checkOut()  {
+    public void checkOut(User user)  {
         this.checkedOut = true;
+        borrowingUser = user;
     }
 
     public void checkIn() {
         this.checkedOut = false;
+        borrowingUser = null;
     }
 }

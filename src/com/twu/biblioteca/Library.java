@@ -28,7 +28,7 @@ public class Library {
 
     private void initUserList() {
         userList = new ArrayList<User>();
-        userList.add(new User(1, "password", "doug", "dougneale@gmail.com"));
+        userList.add(new User(1, "password", "doug", "dougneale@gmail.com", "1234 1234"));
     }
 
 
