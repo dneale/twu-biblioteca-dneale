@@ -13,10 +13,12 @@ public class BibliotecaApp {
     public static void main(String[] args) {
         BibliotecaApp app = new BibliotecaApp();
         app.run();
+
     }
 
     public BibliotecaApp() {
         lib = new Library();
+        this.currentUser = new User(0, "", "", "");
         menuItems = new ArrayList<String>();
         menuItems.add("listbooks - list the currently available books");
         menuItems.add("listmovies - list the currently available movies");
@@ -128,9 +130,19 @@ public class BibliotecaApp {
     }
 
 
-    private boolean logIn(String id, String password)
+    public boolean login(int id, String password)
     {
-        return true;
+        for (User u : lib.getUserList()) {
+            if (u.getId() == id){
+                if (u.getPassword().equals(password)) {
+                    currentUser = u;
+                    return true;
+                }
+                else
+                    return false;
+            }
+        }
+        return false;
     }
 
 

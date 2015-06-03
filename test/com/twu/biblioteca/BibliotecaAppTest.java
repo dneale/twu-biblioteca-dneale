@@ -119,4 +119,14 @@ public class BibliotecaAppTest extends TestCase {
                 "exit - exit Biblioteca\n" +
                 "Enter an option: Exiting\n", outContent.toString());
     }
+
+    public void testLogIn() throws Exception {
+        BibliotecaApp app  = new BibliotecaApp();
+        assertTrue(app.login(1, "password"));
+        assertEquals(1, app.getCurrentUser().getId());
+
+        assertFalse(app.login(1, "wrong password"));
+        assertFalse(app.login(99, "password"));
+
+    }
 }

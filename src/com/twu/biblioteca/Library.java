@@ -9,6 +9,8 @@ public class Library {
 
     public Library() {
         initBookList();
+        initMovieList();
+        initUserList();
     }
 
     private void initBookList() {
@@ -24,12 +26,20 @@ public class Library {
         movieList.add(new Movie("The Matrix", "The Wachoski Brothers", "1999", 0));
     }
 
+    private void initUserList() {
+        userList = new ArrayList<User>();
+        userList.add(new User(1, "password", "doug", "dougneale@gmail.com"));
+    }
+
 
     public ArrayList<Book> getBookList() {
         return bookList;
     }
     public ArrayList<Movie> getMovieList() {
         return movieList;
+    }
+    public ArrayList<User> getUserList() {
+        return userList;
     }
 
     public Book findBook(String name) throws ItemNotFoundException {
