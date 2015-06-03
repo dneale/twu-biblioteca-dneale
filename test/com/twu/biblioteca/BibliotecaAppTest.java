@@ -90,8 +90,10 @@ public class BibliotecaAppTest extends TestCase {
         app.showMenu();
         assertEquals("MENU LIST (select an option):\n" +
                 "listbooks - list the currently available books\n" +
+                "listmovies - list the currently available movies\n" +
                 "checkout - check out a book\n" +
                 "return - return a book\n" +
+                "userinfo - view your information\n" +
                 "exit - exit Biblioteca\n", outContent.toString());
     }
 
@@ -110,8 +112,10 @@ public class BibliotecaAppTest extends TestCase {
                 "\n" +
                 "MENU LIST (select an option):\n" +
                 "listbooks - list the currently available books\n" +
+                "listmovies - list the currently available movies\n" +
                 "checkout - check out a book\n" +
                 "return - return a book\n" +
+                "userinfo - view your information\n" +
                 "exit - exit Biblioteca\n" +
                 "Enter an option: Exiting\n", outContent.toString());
     }

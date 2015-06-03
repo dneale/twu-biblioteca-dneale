@@ -5,11 +5,12 @@ import java.util.Scanner;
 
 public class BibliotecaApp {
 
-    Library lib;
     private static ArrayList<String> menuItems;
+    private Library lib;
+
+    private User currentUser;
 
     public static void main(String[] args) {
-
         BibliotecaApp app = new BibliotecaApp();
         app.run();
     }
@@ -18,8 +19,10 @@ public class BibliotecaApp {
         lib = new Library();
         menuItems = new ArrayList<String>();
         menuItems.add("listbooks - list the currently available books");
+        menuItems.add("listmovies - list the currently available movies");
         menuItems.add("checkout - check out a book");
         menuItems.add("return - return a book");
+        menuItems.add("userinfo - view your information");
         menuItems.add("exit - exit Biblioteca");
     }
 
@@ -88,7 +91,7 @@ public class BibliotecaApp {
         Book b;
         try {
             b = lib.findBook(name);
-        } catch (BookNotFoundException e) {
+        } catch (ItemNotFoundException e) {
             return "That is not a valid book to return.";
         }
         if (b.isCheckedOut())
@@ -106,7 +109,7 @@ public class BibliotecaApp {
         Book b;
         try {
             b = lib.findBook(name);
-        } catch (BookNotFoundException e) {
+        } catch (ItemNotFoundException e) {
             return "That book is not available.";
         }
         if (!b.isCheckedOut())
@@ -118,6 +121,16 @@ public class BibliotecaApp {
         {
             return "That book is not available.";
         }
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+
+    private boolean logIn(String id, String password)
+    {
+        return true;
     }
 
 

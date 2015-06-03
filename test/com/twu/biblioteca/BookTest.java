@@ -5,27 +5,13 @@ import junit.framework.TestCase;
 
 public class BookTest extends TestCase {
 
-    public void testGetTitle() throws Exception {
+    public void testGetAuthor() throws Exception {
         Book b = new Book("Test Book", "Doug Neale", "2015");
-        assertEquals("Test Book", b.getTitle());
+        assertEquals("Doug Neale", b.getAuthor());
     }
 
-    public void testIsCheckedOut() throws Exception {
+    public void testGetYearPublished() throws Exception {
         Book b = new Book("Test Book", "Doug Neale", "2015");
-        assertFalse(b.isCheckedOut());
+        assertEquals("2015", b.getYearPublished());
     }
-
-    public void testCheckOut() throws Exception {
-        Book b = new Book("Test Book", "Doug Neale", "2015");
-        b.checkOut();
-        assertTrue(b.isCheckedOut());
-    }
-
-    public void testCheckIn() throws Exception {
-        Book b = new Book("Test Book", "Doug Neale", "2015");
-        b.checkOut();
-        b.checkIn();
-        assertFalse(b.isCheckedOut());
-    }
-
 }
