@@ -7,6 +7,7 @@ public class BibliotecaApp {
 
     private static ArrayList<String> menuItems;
     private Library lib;
+    Scanner scanner;
 
     private User currentUser;
 
@@ -26,9 +27,11 @@ public class BibliotecaApp {
         menuItems.add("return - return a book");
         menuItems.add("userinfo - view your information");
         menuItems.add("exit - exit Biblioteca");
+
     }
 
     public void run() {
+        scanner = new Scanner(System.in);
         if (!runLogin())
         {
             System.out.println("Login failed. Exiting");
@@ -71,7 +74,7 @@ public class BibliotecaApp {
     public void runPrompt() {
         String output;
         while (true) {
-            Scanner scanner = new Scanner(System.in);
+
             System.out.print("Enter an option: ");
             String option = scanner.nextLine();
 
@@ -167,7 +170,6 @@ public class BibliotecaApp {
 
     public boolean runLogin()
     {
-        Scanner scanner = new Scanner(System.in);
         System.out.print("User ID: ");
         String userId = scanner.nextLine();
         System.out.print("Password: ");
